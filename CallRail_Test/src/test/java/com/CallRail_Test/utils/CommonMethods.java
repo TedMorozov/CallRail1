@@ -13,6 +13,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -51,6 +52,14 @@ public class CommonMethods extends BaseClass {
 			
 	}
 
+	public static boolean isDisplayed(WebElement element) {
+		try {
+			return element.isDisplayed();
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
 	public void acceptAlert() {
 		getWebDriver().switchTo().alert().accept();
 	}
@@ -114,9 +123,19 @@ public class CommonMethods extends BaseClass {
 		return getWebElements(By.cssSelector(cssSelector));
 	}
 	
-	public void waitForElementToPresent(WebElement element) {
+	public static void waitForElementToPresent(WebElement element) {
 		WebDriverWait wait = new WebDriverWait(getWebDriver(), 30);
 		wait.until(ExpectedConditions.visibilityOf(element));
+	}
+	
+	public static void waitForElementToBePresent(WebElement element) {
+		WebDriverWait wait = new WebDriverWait(getWebDriver(), 30);
+		wait.until(ExpectedConditions.visibilityOf(element));
+	}
+
+	public static void waitForElementToBeClickable(WebElement element) {
+		WebDriverWait wait = new WebDriverWait(getWebDriver(), 30);
+		wait.until(ExpectedConditions.elementToBeClickable(element));
 	}
 	
 }
